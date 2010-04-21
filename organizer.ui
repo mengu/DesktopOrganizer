@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1186</width>
-    <height>895</height>
+    <height>954</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,9 +18,9 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>30</y>
+      <y>60</y>
       <width>211</width>
-      <height>291</height>
+      <height>311</height>
      </rect>
     </property>
     <column>
@@ -70,7 +70,7 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>0</y>
+      <y>30</y>
       <width>211</width>
       <height>26</height>
      </rect>
@@ -80,7 +80,7 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>330</y>
+      <y>380</y>
       <width>211</width>
       <height>26</height>
      </rect>
@@ -90,9 +90,9 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>360</y>
+      <y>410</y>
       <width>211</width>
-      <height>461</height>
+      <height>471</height>
      </rect>
     </property>
     <property name="contextMenuPolicy">
@@ -113,7 +113,7 @@
       <x>220</x>
       <y>0</y>
       <width>961</width>
-      <height>811</height>
+      <height>861</height>
      </rect>
     </property>
     <property name="contextMenuPolicy">
@@ -132,6 +132,19 @@
       <string>File Path</string>
      </property>
     </column>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>211</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Select A Directory</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -189,7 +202,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>186</x>
-     <y>370</y>
+     <y>433</y>
     </hint>
     <hint type="destinationlabel">
      <x>214</x>
@@ -205,7 +218,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>168</x>
-     <y>69</y>
+     <y>147</y>
     </hint>
     <hint type="destinationlabel">
      <x>215</x>
@@ -237,7 +250,7 @@
    <hints>
     <hint type="sourcelabel">
      <x>210</x>
-     <y>432</y>
+     <y>510</y>
     </hint>
     <hint type="destinationlabel">
      <x>213</x>
@@ -277,6 +290,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked(bool)</signal>
+   <receiver>Organizer</receiver>
+   <slot>showFileDialog(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>28</x>
+     <y>68</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>16</x>
+     <y>104</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>addNewKeyword()</slot>
@@ -285,5 +314,6 @@
   <slot>showKeywordsTreeMenu(QPoint)</slot>
   <slot>keywordEdited(QTreeWidgetItem*,int)</slot>
   <slot>showFilesTreeMenu(QPoint)</slot>
+  <slot>showFileDialog(bool)</slot>
  </slots>
 </ui>

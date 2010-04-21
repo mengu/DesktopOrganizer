@@ -23,6 +23,21 @@ Organizer::Organizer(QWidget *parent)
     ui->fileTypesTree->setColumnHidden(1, true);
 }
 
+void Organizer::showFileDialog(bool checked)
+{
+    QFileDialog fileDialog(this);
+    fileDialog.setFileMode(QFileDialog::AnyFile);
+    fileDialog.setDirectory("/home/mengu/Desktop");
+    fileDialog.setFileMode(QFileDialog::Directory);
+    QDir selectedDir;
+    if (fileDialog.exec())
+    {
+        selectedDir = fileDialog.directory();
+        qDebug("Selected %s", qPrintable(selectedDir.dirName()));
+        ui->pathEdit->setText(selectedDir.absolutePath());
+    }
+}
+
 void Organizer::addNewKeyword()
 {
     QTreeWidgetItem* newKeyword = new QTreeWidgetItem(ui->keywordsTree);

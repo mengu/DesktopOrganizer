@@ -39,6 +39,7 @@ public slots:
     void moveSelectedFile();
     void deleteSelectedFile();
     void newKeyword();
+    void showFileDialog(bool checked);
 
 private:
     Ui::Organizer *ui;
