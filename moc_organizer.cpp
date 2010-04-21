@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'organizer.h'
 **
-** Created: Tue Apr 20 10:51:01 2010
+** Created: Wed Apr 21 06:45:36 2010
 **      by: The Qt Meta Object Compiler version 61 (Qt 4.5.2)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_Organizer[] = {
        2,       // revision
        0,       // classname
        0,    0, // classinfo
-       8,   12, // methods
+      10,   12, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -37,6 +37,8 @@ static const uint qt_meta_data_Organizer[] = {
      224,   10,   10,   10, 0x0a,
      240,   10,   10,   10, 0x0a,
      259,   10,   10,   10, 0x0a,
+     278,   10,   10,   10, 0x0a,
+     299,   10,   10,   10, 0x0a,
 
        0        // eod
 };
@@ -49,7 +51,8 @@ static const char qt_meta_stringdata_Organizer[] = {
     "openFileOrDirectory(QTreeWidgetItem*,int)\0"
     "menuPoint\0showKeywordsTreeMenu(QPoint)\0"
     "showFilesTreeMenu(QPoint)\0deleteKeyword()\0"
-    "openSelectedFile()\0newKeyword()\0"
+    "openSelectedFile()\0moveSelectedFile()\0"
+    "deleteSelectedFile()\0newKeyword()\0"
 };
 
 const QMetaObject Organizer::staticMetaObject = {
@@ -84,10 +87,12 @@ int Organizer::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 4: showFilesTreeMenu((*reinterpret_cast< QPoint(*)>(_a[1]))); break;
         case 5: deleteKeyword(); break;
         case 6: openSelectedFile(); break;
-        case 7: newKeyword(); break;
+        case 7: moveSelectedFile(); break;
+        case 8: deleteSelectedFile(); break;
+        case 9: newKeyword(); break;
         default: ;
         }
-        _id -= 8;
+        _id -= 10;
     }
     return _id;
 }

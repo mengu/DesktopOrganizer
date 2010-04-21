@@ -63,6 +63,8 @@ void Organizer::removeCurrentFiles()
     }
 }
 
+// TO DO:
+// user setNameFilters.
 void Organizer::searchPath(QString path, QStringList selectedFileTypes)
 {
     QDir dir(path);
@@ -156,7 +158,11 @@ void Organizer::showFilesTreeMenu(QPoint menuPoint)
 {
     QMenu filesTreeMenu(ui->fileListTree);
     QAction* openAction = filesTreeMenu.addAction("Open File");
+    QAction* moveAction = filesTreeMenu.addAction("Move File");
+    QAction* deleteAction = filesTreeMenu.addAction("Delete File");
     connect(openAction, SIGNAL(triggered()), this, SLOT(openSelectedFile()));
+    connect(moveAction, SIGNAL(triggered()), this, SLOT(moveSelectedFile()));
+    connect(deleteAction, SIGNAL(triggered()), this, SLOT(deleteSelectedFile()));
     filesTreeMenu.exec(QCursor::pos());
 }
 
@@ -175,6 +181,44 @@ void Organizer::openSelectedFile()
         execArgs << fileInfo.absoluteFilePath();
         QProcess::execute(this->filetypes.value(fileSuffix), execArgs);
         qDebug("%s %s", qPrintable(this->filetypes.value(fileSuffix)), qPrintable(fileInfo.absoluteFilePath()));
+    }
+}
+
+void Organizer::moveSelectedFile()
+{
+    QTreeWidgetItem* selectedFileItem = ui->fileListTree->selectedItems()[0];
+    QFileInfo fileInfo(selectedFileItem->text(1));
+    QFileDialog fileDialog(this);
+    fileDialog.setFileMode(QFileDialog::AnyFile);
+    fileDialog.setDirectory(fileInfo.absoluteDir());
+    fileDialog.setFileMode(QFileDialog::Directory);
+    QDir selectedDir;
+    if (fileDialog.exec())
+    {
+        selectedDir = fileDialog.directory();
+        qDebug("%s", qPrintable(selectedDir.dirName()));
+        selectedDir.rename(fileInfo.absoluteFilePath(), selectedDir.absolutePath()+"/"+fileInfo.fileName());
+    }
+}
+
+void Organizer::deleteSelectedFile()
+{
+    QTreeWidgetItem* selectedFileItem = ui->fileListTree->selectedItems()[0];
+    QMessageBox alertBox;
+    alertBox.setText("Delete File "+selectedFileItem->text(0));
+    alertBox.setInformativeText("Are you sure you want to delete " + selectedFileItem->text(0) + "?");
+    alertBox.setStandardButtons(QMessageBox::No | QMessageBox::Yes);
+    alertBox.setDefaultButton(QMessageBox::No);
+    int result = alertBox.exec();
+    if (result == QMessageBox::Yes)
+    {
+        QDir dir;
+        dir.remove(selectedFileItem->text(1));
+        delete selectedFileItem;
+    }
+    else
+    {
+        alertBox.close();
     }
 }
 

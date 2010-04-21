@@ -10,7 +10,9 @@
 #include <QtCore/QDir>
 #include <QtCore/QFileInfo>
 #include <QtCore/QFileInfoList>
+#include <QtGui/QFileDialog>
 #include <QtGui/QMenu>
+#include <QtGui/QMessageBox>
 #include <QtCore/QProcess>
 
 namespace Ui
@@ -34,6 +36,8 @@ public slots:
     void showFilesTreeMenu(QPoint menuPoint);
     void deleteKeyword();
     void openSelectedFile();
+    void moveSelectedFile();
+    void deleteSelectedFile();
     void newKeyword();
 
 private:
