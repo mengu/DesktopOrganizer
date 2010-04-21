@@ -159,7 +159,6 @@ void Organizer::newKeyword()
     int topLevelItemCount = ui->keywordsTree->topLevelItemCount() == 0 ? 0 : ui->keywordsTree->topLevelItemCount() + 1;
     ui->keywordsTree->insertTopLevelItem(topLevelItemCount, newKeywordItem);
     newKeywordItem->setFlags(newKeywordItem->flags() | Qt::ItemIsEditable);
-    //ui->keywordsTree->editItem(newKeywordItem, 0);
 }
 
 void Organizer::showFilesTreeMenu(QPoint menuPoint)
@@ -241,6 +240,11 @@ void Organizer::editKeyword(QTreeWidgetItem* selectedItem, int column)
     ui->keywordsTree->editItem(selectedItem, column);
 }
 
+void Organizer::keywordEdited(QTreeWidgetItem* selectedItem, int column)
+{
+    this->getAllKeywords();
+}
+
 void Organizer::deleteKeyword()
 {
     QTreeWidgetItem* selectedKeyword = ui->keywordsTree->selectedItems()[0];
@@ -251,6 +255,7 @@ void Organizer::deleteKeyword()
 
 void Organizer::getAllKeywords()
 {
+    this->keywords.clear();
     QTreeWidgetItemIterator it(ui->keywordsTree);
     while (*it)
     {

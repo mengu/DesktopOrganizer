@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'organizer.ui'
 **
-** Created: Wed Apr 21 10:34:09 2010
+** Created: Wed Apr 21 10:38:48 2010
 **      by: Qt User Interface Compiler version 4.5.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -114,6 +114,7 @@ public:
         QObject::connect(fileListTree, SIGNAL(customContextMenuRequested(QPoint)), Organizer, SLOT(showFilesTreeMenu(QPoint)));
         QObject::connect(pushButton, SIGNAL(clicked(bool)), Organizer, SLOT(showFileDialog(bool)));
         QObject::connect(keywordsTree, SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)), Organizer, SLOT(editKeyword(QTreeWidgetItem*,int)));
+        QObject::connect(keywordsTree, SIGNAL(itemChanged(QTreeWidgetItem*,int)), Organizer, SLOT(keywordEdited(QTreeWidgetItem*,int)));
 
         QMetaObject::connectSlotsByName(Organizer);
     } // setupUi

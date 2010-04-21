@@ -328,6 +328,22 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>keywordsTree</sender>
+   <signal>itemChanged(QTreeWidgetItem*,int)</signal>
+   <receiver>Organizer</receiver>
+   <slot>keywordEdited(QTreeWidgetItem*,int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>195</x>
+     <y>795</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>215</x>
+     <y>796</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>addNewKeyword()</slot>
@@ -337,5 +353,6 @@
   <slot>showFilesTreeMenu(QPoint)</slot>
   <slot>showFileDialog(bool)</slot>
   <slot>editKeyword(QTreeWidgetItem*,int)</slot>
+  <slot>keywordEdited(QTreeWidgetItem*,int)</slot>
  </slots>
 </ui>

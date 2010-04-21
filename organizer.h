@@ -41,6 +41,7 @@ public slots:
     void newKeyword();
     void showFileDialog(bool checked);
     void editKeyword(QTreeWidgetItem* selectedItem, int column);
+    void keywordEdited(QTreeWidgetItem* selectedItem, int column);
 
 private:
     Ui::Organizer *ui;

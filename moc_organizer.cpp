@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'organizer.h'
 **
-** Created: Wed Apr 21 10:34:12 2010
+** Created: Wed Apr 21 10:38:51 2010
 **      by: The Qt Meta Object Compiler version 61 (Qt 4.5.2)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_Organizer[] = {
        2,       // revision
        0,       // classname
        0,    0, // classinfo
-      12,   12, // methods
+      13,   12, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -41,6 +41,7 @@ static const uint qt_meta_data_Organizer[] = {
      299,   10,   10,   10, 0x0a,
      320,  312,   10,   10, 0x0a,
      361,  341,   10,   10, 0x0a,
+     395,  341,   10,   10, 0x0a,
 
        0        // eod
 };
@@ -58,6 +59,7 @@ static const char qt_meta_stringdata_Organizer[] = {
     "checked\0showFileDialog(bool)\0"
     "selectedItem,column\0"
     "editKeyword(QTreeWidgetItem*,int)\0"
+    "keywordEdited(QTreeWidgetItem*,int)\0"
 };
 
 const QMetaObject Organizer::staticMetaObject = {
@@ -97,9 +99,10 @@ int Organizer::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 9: newKeyword(); break;
         case 10: showFileDialog((*reinterpret_cast< bool(*)>(_a[1]))); break;
         case 11: editKeyword((*reinterpret_cast< QTreeWidgetItem*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 12: keywordEdited((*reinterpret_cast< QTreeWidgetItem*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         default: ;
         }
-        _id -= 12;
+        _id -= 13;
     }
     return _id;
 }
