@@ -196,18 +196,17 @@ void Organizer::openSelectedFile()
 
 void Organizer::moveSelectedFile()
 {
-    for (int i = 0; i < ui->fileListTree->selectedItems().length(); i++)
+    QFileDialog fileDialog(this);
+    fileDialog.setFileMode(QFileDialog::AnyFile);
+    fileDialog.setFileMode(QFileDialog::Directory);
+    QDir selectedDir;
+    if (fileDialog.exec())
     {
-        QTreeWidgetItem* selectedFileItem = ui->fileListTree->selectedItems().at(i);
-        QFileInfo fileInfo(selectedFileItem->text(1));
-        QFileDialog fileDialog(this);
-        fileDialog.setFileMode(QFileDialog::AnyFile);
-        fileDialog.setDirectory(fileInfo.absoluteDir());
-        fileDialog.setFileMode(QFileDialog::Directory);
-        QDir selectedDir;
-        if (fileDialog.exec())
+        selectedDir = fileDialog.directory();
+        for (int i = 0; i < ui->fileListTree->selectedItems().length(); i++)
         {
-            selectedDir = fileDialog.directory();
+            QTreeWidgetItem* selectedFileItem = ui->fileListTree->selectedItems().at(i);
+            QFileInfo fileInfo(selectedFileItem->text(1));
             qDebug("%s", qPrintable(selectedDir.dirName()));
             selectedDir.rename(fileInfo.absoluteFilePath(), selectedDir.absolutePath()+"/"+fileInfo.fileName());
         }
