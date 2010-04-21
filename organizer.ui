@@ -38,7 +38,7 @@
       <string>Books</string>
      </property>
      <property name="text">
-      <string>pdf, chm</string>
+      <string>*.pdf, *.chm</string>
      </property>
     </item>
     <item>
@@ -46,7 +46,7 @@
       <string>Videos</string>
      </property>
      <property name="text">
-      <string>ogg, mpg, mp4, mov, avi</string>
+      <string>*.ogg, *.mpg, *.mp4, *.mov, *.avi</string>
      </property>
     </item>
     <item>
@@ -54,7 +54,7 @@
       <string>Documents</string>
      </property>
      <property name="text">
-      <string>doc, odt, txt</string>
+      <string>*.doc, *.odt, *.txt</string>
      </property>
     </item>
     <item>
@@ -62,7 +62,7 @@
       <string>Archives</string>
      </property>
      <property name="text">
-      <string>rar, zip, tar, tar.gz</string>
+      <string>*.rar, *.zip, *.tar, *.tar.gz</string>
      </property>
     </item>
    </widget>

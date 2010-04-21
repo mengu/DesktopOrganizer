@@ -63,15 +63,14 @@ void Organizer::removeCurrentFiles()
     }
 }
 
-// TO DO:
-// user setNameFilters.
 void Organizer::searchPath(QString path, QStringList selectedFileTypes)
 {
     QDir dir(path);
     if (dir.exists())
     {
         dir.setFilter(QDir::NoDotAndDotDot | QDir::AllDirs | QDir::Files);
-        dir.setSorting(QDir::DirsFirst | QDir::Reversed);
+        dir.setSorting(QDir::DirsFirst);
+        dir.setNameFilters(selectedFileTypes);
 
         QFileInfoList list = dir.entryInfoList();
         for (int i = 0; i < list.size(); ++i)
@@ -94,10 +93,7 @@ void Organizer::searchPath(QString path, QStringList selectedFileTypes)
                 }
                 else
                 {
-                    if (selectedFileTypes.contains(fileInfo.completeSuffix()) || selectedFileTypes.contains(fileInfo.suffix()))
-                    {
-                        this->addNewFileToFilesTree(fileInfo);
-                    }
+                    this->addNewFileToFilesTree(fileInfo);
                 }
             }
             if (fileInfo.isDir())

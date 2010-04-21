@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'organizer.ui'
 **
-** Created: Tue Apr 20 10:47:56 2010
+** Created: Wed Apr 21 07:00:43 2010
 **      by: Qt User Interface Compiler version 4.5.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -121,16 +121,16 @@ public:
         const bool __sortingEnabled = fileTypesTree->isSortingEnabled();
         fileTypesTree->setSortingEnabled(false);
         QTreeWidgetItem *___qtreewidgetitem1 = fileTypesTree->topLevelItem(0);
-        ___qtreewidgetitem1->setText(1, QApplication::translate("Organizer", "pdf, chm", 0, QApplication::UnicodeUTF8));
+        ___qtreewidgetitem1->setText(1, QApplication::translate("Organizer", "*.pdf, *.chm", 0, QApplication::UnicodeUTF8));
         ___qtreewidgetitem1->setText(0, QApplication::translate("Organizer", "Books", 0, QApplication::UnicodeUTF8));
         QTreeWidgetItem *___qtreewidgetitem2 = fileTypesTree->topLevelItem(1);
-        ___qtreewidgetitem2->setText(1, QApplication::translate("Organizer", "ogg, mpg, mp4, mov, avi", 0, QApplication::UnicodeUTF8));
+        ___qtreewidgetitem2->setText(1, QApplication::translate("Organizer", "*.ogg, *.mpg, *.mp4, *.mov, *.avi", 0, QApplication::UnicodeUTF8));
         ___qtreewidgetitem2->setText(0, QApplication::translate("Organizer", "Videos", 0, QApplication::UnicodeUTF8));
         QTreeWidgetItem *___qtreewidgetitem3 = fileTypesTree->topLevelItem(2);
-        ___qtreewidgetitem3->setText(1, QApplication::translate("Organizer", "doc, odt, txt", 0, QApplication::UnicodeUTF8));
+        ___qtreewidgetitem3->setText(1, QApplication::translate("Organizer", "*.doc, *.odt, *.txt", 0, QApplication::UnicodeUTF8));
         ___qtreewidgetitem3->setText(0, QApplication::translate("Organizer", "Documents", 0, QApplication::UnicodeUTF8));
         QTreeWidgetItem *___qtreewidgetitem4 = fileTypesTree->topLevelItem(3);
-        ___qtreewidgetitem4->setText(1, QApplication::translate("Organizer", "rar, zip, tar, tar.gz", 0, QApplication::UnicodeUTF8));
+        ___qtreewidgetitem4->setText(1, QApplication::translate("Organizer", "*.rar, *.zip, *.tar, *.tar.gz", 0, QApplication::UnicodeUTF8));
         ___qtreewidgetitem4->setText(0, QApplication::translate("Organizer", "Archives", 0, QApplication::UnicodeUTF8));
         fileTypesTree->setSortingEnabled(__sortingEnabled);
 
