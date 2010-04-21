@@ -40,6 +40,7 @@ public slots:
     void deleteSelectedFile();
     void newKeyword();
     void showFileDialog(bool checked);
+    void editKeyword(QTreeWidgetItem* selectedItem, int column);
 
 private:
     Ui::Organizer *ui;

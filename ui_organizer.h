@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'organizer.ui'
 **
-** Created: Wed Apr 21 07:35:16 2010
+** Created: Wed Apr 21 10:34:09 2010
 **      by: Qt User Interface Compiler version 4.5.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -76,8 +76,10 @@ public:
         keywordsTree->setEditTriggers(QAbstractItemView::EditKeyPressed);
         fileListTree = new QTreeWidget(centralWidget);
         fileListTree->setObjectName(QString::fromUtf8("fileListTree"));
-        fileListTree->setGeometry(QRect(220, 0, 961, 861));
+        fileListTree->setGeometry(QRect(220, 0, 961, 881));
         fileListTree->setContextMenuPolicy(Qt::CustomContextMenu);
+        fileListTree->setSelectionMode(QAbstractItemView::MultiSelection);
+        fileListTree->setSortingEnabled(true);
         fileListTree->header()->setProperty("showSortIndicator", QVariant(true));
         pushButton = new QPushButton(centralWidget);
         pushButton->setObjectName(QString::fromUtf8("pushButton"));
@@ -111,6 +113,7 @@ public:
         QObject::connect(actionClose, SIGNAL(triggered()), Organizer, SLOT(close()));
         QObject::connect(fileListTree, SIGNAL(customContextMenuRequested(QPoint)), Organizer, SLOT(showFilesTreeMenu(QPoint)));
         QObject::connect(pushButton, SIGNAL(clicked(bool)), Organizer, SLOT(showFileDialog(bool)));
+        QObject::connect(keywordsTree, SIGNAL(itemDoubleClicked(QTreeWidgetItem*,int)), Organizer, SLOT(editKeyword(QTreeWidgetItem*,int)));
 
         QMetaObject::connectSlotsByName(Organizer);
     } // setupUi
@@ -130,7 +133,7 @@ public:
         ___qtreewidgetitem1->setText(1, QApplication::translate("Organizer", "*.pdf, *.chm", 0, QApplication::UnicodeUTF8));
         ___qtreewidgetitem1->setText(0, QApplication::translate("Organizer", "Books", 0, QApplication::UnicodeUTF8));
         QTreeWidgetItem *___qtreewidgetitem2 = fileTypesTree->topLevelItem(1);
-        ___qtreewidgetitem2->setText(1, QApplication::translate("Organizer", "*.ogg, *.mpg, *.mp4, *.mov, *.avi", 0, QApplication::UnicodeUTF8));
+        ___qtreewidgetitem2->setText(1, QApplication::translate("Organizer", "*.ogg, *.ogv, *.mpg, *.mp4, *.mov, *.avi", 0, QApplication::UnicodeUTF8));
         ___qtreewidgetitem2->setText(0, QApplication::translate("Organizer", "Videos", 0, QApplication::UnicodeUTF8));
         QTreeWidgetItem *___qtreewidgetitem3 = fileTypesTree->topLevelItem(2);
         ___qtreewidgetitem3->setText(1, QApplication::translate("Organizer", "*.doc, *.odt, *.txt", 0, QApplication::UnicodeUTF8));

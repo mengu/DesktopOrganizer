@@ -46,7 +46,7 @@
       <string>Videos</string>
      </property>
      <property name="text">
-      <string>*.ogg, *.mpg, *.mp4, *.mov, *.avi</string>
+      <string>*.ogg, *.ogv, *.mpg, *.mp4, *.mov, *.avi</string>
      </property>
     </item>
     <item>
@@ -113,11 +113,17 @@
       <x>220</x>
       <y>0</y>
       <width>961</width>
-      <height>861</height>
+      <height>881</height>
      </rect>
     </property>
     <property name="contextMenuPolicy">
      <enum>Qt::CustomContextMenu</enum>
+    </property>
+    <property name="selectionMode">
+     <enum>QAbstractItemView::MultiSelection</enum>
+    </property>
+    <property name="sortingEnabled">
+     <bool>true</bool>
     </property>
     <attribute name="headerShowSortIndicator" stdset="0">
      <bool>true</bool>
@@ -298,11 +304,27 @@
    <hints>
     <hint type="sourcelabel">
      <x>28</x>
-     <y>68</y>
+     <y>58</y>
     </hint>
     <hint type="destinationlabel">
      <x>16</x>
      <y>104</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>keywordsTree</sender>
+   <signal>itemDoubleClicked(QTreeWidgetItem*,int)</signal>
+   <receiver>Organizer</receiver>
+   <slot>editKeyword(QTreeWidgetItem*,int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>202</x>
+     <y>722</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>215</x>
+     <y>721</y>
     </hint>
    </hints>
   </connection>
@@ -312,8 +334,8 @@
   <slot>startSearch(QTreeWidgetItem*,int)</slot>
   <slot>openFileOrDirectory(QTreeWidgetItem*,int)</slot>
   <slot>showKeywordsTreeMenu(QPoint)</slot>
-  <slot>keywordEdited(QTreeWidgetItem*,int)</slot>
   <slot>showFilesTreeMenu(QPoint)</slot>
   <slot>showFileDialog(bool)</slot>
+  <slot>editKeyword(QTreeWidgetItem*,int)</slot>
  </slots>
 </ui>

@@ -7,6 +7,7 @@ Organizer::Organizer(QWidget *parent)
     this->filetypes["pdf"] = "evince";
     this->filetypes["chm"] = "chmsee";
     this->filetypes["ogg"] = "totem";
+    this->filetypes["ogv"] = "totem";
     this->filetypes["mpg"] = "totem";
     this->filetypes["mp4"] = "totem";
     this->filetypes["mov"] = "totem";
@@ -56,9 +57,8 @@ void Organizer::startSearch(QTreeWidgetItem* clickedItem, int isDoubleClick)
     else
     {
         ui->fileListTree->clear();
-        //this->removeCurrentFiles();
+        this->keywords.clear();
         this->getAllKeywords();
-        qDebug("%s", qPrintable(clickedItem->text(1)));
         QStringList selectedFileTypes = clickedItem->text(1).split(", ", QString::SkipEmptyParts);
         this->searchPath(ui->pathEdit->text(), selectedFileTypes);
     }
@@ -99,10 +99,7 @@ void Organizer::searchPath(QString path, QStringList selectedFileTypes)
                     {
                         if (fileInfo.fileName().toLower().indexOf(this->keywords[i].toLower()) != -1)
                         {
-                            if (selectedFileTypes.contains(fileInfo.completeSuffix()) || selectedFileTypes.contains(fileInfo.suffix()))
-                            {
-                                this->addNewFileToFilesTree(fileInfo);
-                            }
+                            this->addNewFileToFilesTree(fileInfo);
                         }
                     }
                 }
@@ -179,36 +176,42 @@ void Organizer::showFilesTreeMenu(QPoint menuPoint)
 
 void Organizer::openSelectedFile()
 {
-    QTreeWidgetItem* selectedFileItem = ui->fileListTree->selectedItems()[0];
-    QFileInfo fileInfo(selectedFileItem->text(1));
-    QString fileSuffix = fileInfo.completeSuffix();
-    if (fileSuffix.count(".") > 1)
+    for (int i = 0; i < ui->fileListTree->selectedItems().length(); i++)
     {
-        fileSuffix = fileInfo.suffix();
-    }
-    if (this->filetypes.contains(fileSuffix))
-    {
-        QStringList execArgs;
-        execArgs << fileInfo.absoluteFilePath();
-        QProcess::execute(this->filetypes.value(fileSuffix), execArgs);
-        qDebug("%s %s", qPrintable(this->filetypes.value(fileSuffix)), qPrintable(fileInfo.absoluteFilePath()));
+        QTreeWidgetItem* selectedFileItem = ui->fileListTree->selectedItems().at(i);
+        QFileInfo fileInfo(selectedFileItem->text(1));
+        QString fileSuffix = fileInfo.completeSuffix();
+        if (fileSuffix.count(".") > 1)
+        {
+            fileSuffix = fileInfo.suffix();
+        }
+        if (this->filetypes.contains(fileSuffix))
+        {
+            QStringList execArgs;
+            execArgs << fileInfo.absoluteFilePath();
+            QProcess::execute(this->filetypes.value(fileSuffix), execArgs);
+            qDebug("%s %s", qPrintable(this->filetypes.value(fileSuffix)), qPrintable(fileInfo.absoluteFilePath()));
+        }
     }
 }
 
 void Organizer::moveSelectedFile()
 {
-    QTreeWidgetItem* selectedFileItem = ui->fileListTree->selectedItems()[0];
-    QFileInfo fileInfo(selectedFileItem->text(1));
-    QFileDialog fileDialog(this);
-    fileDialog.setFileMode(QFileDialog::AnyFile);
-    fileDialog.setDirectory(fileInfo.absoluteDir());
-    fileDialog.setFileMode(QFileDialog::Directory);
-    QDir selectedDir;
-    if (fileDialog.exec())
+    for (int i = 0; i < ui->fileListTree->selectedItems().length(); i++)
     {
-        selectedDir = fileDialog.directory();
-        qDebug("%s", qPrintable(selectedDir.dirName()));
-        selectedDir.rename(fileInfo.absoluteFilePath(), selectedDir.absolutePath()+"/"+fileInfo.fileName());
+        QTreeWidgetItem* selectedFileItem = ui->fileListTree->selectedItems().at(i);
+        QFileInfo fileInfo(selectedFileItem->text(1));
+        QFileDialog fileDialog(this);
+        fileDialog.setFileMode(QFileDialog::AnyFile);
+        fileDialog.setDirectory(fileInfo.absoluteDir());
+        fileDialog.setFileMode(QFileDialog::Directory);
+        QDir selectedDir;
+        if (fileDialog.exec())
+        {
+            selectedDir = fileDialog.directory();
+            qDebug("%s", qPrintable(selectedDir.dirName()));
+            selectedDir.rename(fileInfo.absoluteFilePath(), selectedDir.absolutePath()+"/"+fileInfo.fileName());
+        }
     }
 }
 
@@ -231,6 +234,11 @@ void Organizer::deleteSelectedFile()
     {
         alertBox.close();
     }
+}
+
+void Organizer::editKeyword(QTreeWidgetItem* selectedItem, int column)
+{
+    ui->keywordsTree->editItem(selectedItem, column);
 }
 
 void Organizer::deleteKeyword()
