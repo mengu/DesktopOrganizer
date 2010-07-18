@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'organizer.h'
 **
-** Created: Wed Apr 21 10:38:51 2010
+** Created: Sat Apr 24 08:41:54 2010
 **      by: The Qt Meta Object Compiler version 61 (Qt 4.5.2)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,34 +23,34 @@ static const uint qt_meta_data_Organizer[] = {
        2,       // revision
        0,       // classname
        0,    0, // classinfo
-      13,   12, // methods
+      14,   12, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
 
  // slots: signature, parameters, type, tag, flags
       11,   10,   10,   10, 0x0a,
-      53,   27,   10,   10, 0x0a,
-     117,   87,   10,   10, 0x0a,
-     169,  159,   10,   10, 0x0a,
-     198,  159,   10,   10, 0x0a,
-     224,   10,   10,   10, 0x0a,
-     240,   10,   10,   10, 0x0a,
-     259,   10,   10,   10, 0x0a,
-     278,   10,   10,   10, 0x0a,
-     299,   10,   10,   10, 0x0a,
-     320,  312,   10,   10, 0x0a,
-     361,  341,   10,   10, 0x0a,
-     395,  341,   10,   10, 0x0a,
+      46,   27,   10,   10, 0x0a,
+     103,   80,   10,   10, 0x0a,
+     155,  145,   10,   10, 0x0a,
+     184,  145,   10,   10, 0x0a,
+     210,   10,   10,   10, 0x0a,
+     226,   10,   10,   10, 0x0a,
+     245,   10,   10,   10, 0x0a,
+     264,   10,   10,   10, 0x0a,
+     285,   10,   10,   10, 0x0a,
+     306,  298,   10,   10, 0x0a,
+     347,  327,   10,   10, 0x0a,
+     381,  327,   10,   10, 0x0a,
+     417,   10,   10,   10, 0x0a,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_Organizer[] = {
     "Organizer\0\0addNewKeyword()\0"
-    "clickedItem,isDoubleClick\0"
-    "startSearch(QTreeWidgetItem*,int)\0"
-    "clickedFileItem,isDoubleClick\0"
+    "clickedItem,column\0startSearch(QTreeWidgetItem*,int)\0"
+    "clickedFileItem,column\0"
     "openFileOrDirectory(QTreeWidgetItem*,int)\0"
     "menuPoint\0showKeywordsTreeMenu(QPoint)\0"
     "showFilesTreeMenu(QPoint)\0deleteKeyword()\0"
@@ -60,6 +60,7 @@ static const char qt_meta_stringdata_Organizer[] = {
     "selectedItem,column\0"
     "editKeyword(QTreeWidgetItem*,int)\0"
     "keywordEdited(QTreeWidgetItem*,int)\0"
+    "showSettingsDialog()\0"
 };
 
 const QMetaObject Organizer::staticMetaObject = {
@@ -100,9 +101,10 @@ int Organizer::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         case 10: showFileDialog((*reinterpret_cast< bool(*)>(_a[1]))); break;
         case 11: editKeyword((*reinterpret_cast< QTreeWidgetItem*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 12: keywordEdited((*reinterpret_cast< QTreeWidgetItem*(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 13: showSettingsDialog(); break;
         default: ;
         }
-        _id -= 13;
+        _id -= 14;
     }
     return _id;
 }

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<filetypes>
+  <filetype extensions="*.pdf, *.chm">Books</filetype>
+  <filetype extensions="*.ogv, *.mpg, *.mov, *.mp4, *.avi">Videos</filetype>
+  <filetype extensions="*.txt, *.odt, *.doc">Documents</filetype>
+  <filetype extensions="*.zip, *.rar, *.tar, *.tar.gz">Archives</filetype>
+</filetypes>
+
+<associations>
+  <association extension="pdf">evince</association>
+  <association extension="chm">chmsee</association>
+  <association extension="ogg">totem</association>
+  <association extension="ogv">totem</association>
+  <association extension="mpg">totem</association>
+  <association extension="mp4">totem</association>
+  <association extension="mov">totem</association>
+  <association extension="avi">totem</association>
+  <association extension="rar">file-roller</association>
+  <association extension="zip">file-roller</association>
+  <association extension="tar">file-roller</association>
+  <association extension="tar.gz">file-roller</association>
+  <association extension="doc">ooffice -writer</association>
+  <association extension="odt">ooffice -writer</association>
+  <association extension="txt">gedit</association>
+</associations>
+

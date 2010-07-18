@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading ui file 'organizer.ui'
 **
-** Created: Wed Apr 21 10:38:48 2010
+** Created: Thu Apr 22 03:28:11 2010
 **      by: Qt User Interface Compiler version 4.5.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling ui file!
@@ -32,6 +32,7 @@ class Ui_Organizer
 public:
     QAction *actionClose;
     QAction *actionAbout;
+    QAction *actionSettings;
     QWidget *centralWidget;
     QTreeWidget *fileTypesTree;
     QLineEdit *pathEdit;
@@ -54,6 +55,8 @@ public:
         actionClose->setObjectName(QString::fromUtf8("actionClose"));
         actionAbout = new QAction(Organizer);
         actionAbout->setObjectName(QString::fromUtf8("actionAbout"));
+        actionSettings = new QAction(Organizer);
+        actionSettings->setObjectName(QString::fromUtf8("actionSettings"));
         centralWidget = new QWidget(Organizer);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         fileTypesTree = new QTreeWidget(centralWidget);
@@ -102,6 +105,7 @@ public:
 
         menuBar->addAction(menuFile->menuAction());
         menuBar->addAction(menuHelp->menuAction());
+        menuFile->addAction(actionSettings);
         menuFile->addAction(actionClose);
         menuHelp->addAction(actionAbout);
 
@@ -124,6 +128,7 @@ public:
         Organizer->setWindowTitle(QApplication::translate("Organizer", "Organizer", 0, QApplication::UnicodeUTF8));
         actionClose->setText(QApplication::translate("Organizer", "Close", 0, QApplication::UnicodeUTF8));
         actionAbout->setText(QApplication::translate("Organizer", "About", 0, QApplication::UnicodeUTF8));
+        actionSettings->setText(QApplication::translate("Organizer", "Settings", 0, QApplication::UnicodeUTF8));
         QTreeWidgetItem *___qtreewidgetitem = fileTypesTree->headerItem();
         ___qtreewidgetitem->setText(1, QApplication::translate("Organizer", "File Extensions", 0, QApplication::UnicodeUTF8));
         ___qtreewidgetitem->setText(0, QApplication::translate("Organizer", "File Types", 0, QApplication::UnicodeUTF8));

@@ -166,6 +166,7 @@
     <property name="title">
      <string>File</string>
     </property>
+    <addaction name="actionSettings"/>
     <addaction name="actionClose"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
@@ -194,6 +195,11 @@
   <action name="actionAbout">
    <property name="text">
     <string>About</string>
+   </property>
+  </action>
+  <action name="actionSettings">
+   <property name="text">
+    <string>Settings</string>
    </property>
   </action>
  </widget>

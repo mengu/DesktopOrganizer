@@ -1,5 +1,22 @@
+/*****************************************************************************
+* This file is part of DesktopOrganizer.
+*
+* DesktopOrganizer is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* DesktopOrganizer is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with DesktopOrganizer.  If not, see <http://www.gnu.org/licenses/>.
+******************************************************************************/
 #include "organizer.h"
 #include "ui_organizer.h"
+#include "organizersettings.h"
 
 Organizer::Organizer(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::Organizer)
@@ -20,15 +37,28 @@ Organizer::Organizer(QWidget *parent)
     this->filetypes["odt"] = "ooffice -writer";
     this->filetypes["txt"] = "gedit";
     ui->setupUi(this);
-    ui->pathEdit->setText("/home/mengu/Desktop");
+    QString userEnvVar = getenv("USER");
+    ui->pathEdit->setText("/home/"+userEnvVar);
     ui->fileTypesTree->setColumnHidden(1, true);
+
+    /* read settings.xml */
+
+
+    connect(ui->actionSettings, SIGNAL(triggered()), this, SLOT(showSettingsDialog()));
 }
 
+/**
+ * Shows directory selecting dialog.
+ *
+ * @param    bool    Checked.
+ *
+ */
 void Organizer::showFileDialog(bool checked)
 {
     QFileDialog fileDialog(this);
     fileDialog.setFileMode(QFileDialog::AnyFile);
-    fileDialog.setDirectory("/home/mengu/Desktop");
+    QString userEnvVar = getenv("USER");
+    fileDialog.setDirectory("/home/"+userEnvVar);
     fileDialog.setFileMode(QFileDialog::Directory);
     QDir selectedDir;
     if (fileDialog.exec())
@@ -39,6 +69,11 @@ void Organizer::showFileDialog(bool checked)
     }
 }
 
+/**
+ * Adds a new keyword from keyword edit widget. Emitted when a user types
+ * a keyword to keyword edit widget and press enter key.
+ *
+ */
 void Organizer::addNewKeyword()
 {
     QTreeWidgetItem* newKeyword = new QTreeWidgetItem(ui->keywordsTree);
@@ -47,8 +82,15 @@ void Organizer::addNewKeyword()
     newKeyword->setText(0, ui->keywordsEdit->text());
     ui->keywordsEdit->setText("");
 }
-
-void Organizer::startSearch(QTreeWidgetItem* clickedItem, int isDoubleClick)
+/**
+ * Starts file searching. Emitted when user double clicks on an item
+ * in the fileTypes tree widget.
+ *
+ * @param    QTreeWidgetItem*    Item that has been clicked.
+ * @param    int                 Column of the clicked item.
+ *
+ */
+void Organizer::startSearch(QTreeWidgetItem* clickedItem, int column)
 {
     if (ui->pathEdit->text().size() == 0)
     {
@@ -64,20 +106,14 @@ void Organizer::startSearch(QTreeWidgetItem* clickedItem, int isDoubleClick)
     }
 }
 
-void Organizer::removeCurrentFiles()
-{
-    for (int i = 0; i <= ui->fileListTree->topLevelItemCount(); i++)
-    {
-        ui->fileListTree->takeTopLevelItem(i);
-        QTreeWidgetItem *widgetItem = ui->fileListTree->topLevelItem(i);
-        for (int j = 0; j <= widgetItem->childCount(); j++)
-        {
-            QTreeWidgetItem *childWidget = widgetItem->child(j);
-            widgetItem->removeChild(childWidget);
-        }
-    }
-}
-
+/**
+ * Searches the given path with the given file types.
+ * Called from Organizer::startSearch method.
+ *
+ * @param    QString        Path to start search.
+ * @param    QStringList    File types for filtering.
+ *
+ */
 void Organizer::searchPath(QString path, QStringList selectedFileTypes)
 {
     QDir dir(path);
@@ -116,6 +152,13 @@ void Organizer::searchPath(QString path, QStringList selectedFileTypes)
     }
 }
 
+/**
+ * Adds a new file to the filesTree tree widget.
+ * Called from Organizer::searchPath method.
+ *
+ * @param    QFileInfo    File info.
+ *
+ */
 void Organizer::addNewFileToFilesTree(QFileInfo fileInfo)
 {
     QTreeWidgetItem *newFileItem = new QTreeWidgetItem(ui->fileListTree);
@@ -125,7 +168,14 @@ void Organizer::addNewFileToFilesTree(QFileInfo fileInfo)
     ui->fileListTree->insertTopLevelItem(topLevelItemCount, newFileItem);
 }
 
-void Organizer::openFileOrDirectory(QTreeWidgetItem* clickedFileItem, int isDoubleClick)
+/**
+ * Opens a file or directory. (Opening directories is not implemented yet.)
+ * Emitted when the user double clicks on a file on the fileListTree tree widget.
+ *
+ * @param    QTreeWidgetItem*     Item that has been clicked.
+ * @param    int                  Column of the clicked item.
+ */
+void Organizer::openFileOrDirectory(QTreeWidgetItem* clickedFileItem, int column)
 {
     QFileInfo fileInfo(clickedFileItem->text(1));
     QString fileSuffix = fileInfo.completeSuffix();
@@ -142,6 +192,13 @@ void Organizer::openFileOrDirectory(QTreeWidgetItem* clickedFileItem, int isDoub
     }
 }
 
+/**
+ * Displays a custom context menu for the keywords tree.
+ * Emitted when custom context menu requested.
+ *
+ * @param    QPoint    Point of the menu.
+ *
+ */
 void Organizer::showKeywordsTreeMenu(QPoint menuPoint)
 {
     QMenu keywordsMenu(ui->keywordsTree);
@@ -152,6 +209,11 @@ void Organizer::showKeywordsTreeMenu(QPoint menuPoint)
     keywordsMenu.exec(QCursor::pos());
 }
 
+/**
+ * Adds a new keyword to keywordsTree tree widget.
+ * Emitted when user clicks "Add New" context menu item.
+ *
+ */
 void Organizer::newKeyword()
 {
     QTreeWidgetItem* newKeywordItem = new QTreeWidgetItem(ui->keywordsTree);
@@ -161,6 +223,13 @@ void Organizer::newKeyword()
     newKeywordItem->setFlags(newKeywordItem->flags() | Qt::ItemIsEditable);
 }
 
+/**
+ * Displays a custom context menu for the file list tree.
+ * Emitted when custom context menu requested.
+ *
+ * @param    QPoint    Menu point.
+ *
+ */
 void Organizer::showFilesTreeMenu(QPoint menuPoint)
 {
     QMenu filesTreeMenu(ui->fileListTree);
@@ -173,6 +242,11 @@ void Organizer::showFilesTreeMenu(QPoint menuPoint)
     filesTreeMenu.exec(QCursor::pos());
 }
 
+/**
+ * Opens the selected file from the files tree.
+ * Emitted when user clicks context menu item "Open File".
+ *
+ */
 void Organizer::openSelectedFile()
 {
     for (int i = 0; i < ui->fileListTree->selectedItems().length(); i++)
@@ -194,6 +268,12 @@ void Organizer::openSelectedFile()
     }
 }
 
+/**
+ * Displays a file dialog for choosing the target directory for moving files
+ * and moves the selected files.
+ * Emitted when user clicks context menu item "Move File".
+ *
+ */
 void Organizer::moveSelectedFile()
 {
     QFileDialog fileDialog(this);
@@ -213,6 +293,11 @@ void Organizer::moveSelectedFile()
     }
 }
 
+/**
+ * Deletes the selected file from both file system and the files tree.
+ * Emitted when user clicks context menu item "Delete File".
+ *
+ */
 void Organizer::deleteSelectedFile()
 {
     QTreeWidgetItem* selectedFileItem = ui->fileListTree->selectedItems()[0];
@@ -234,16 +319,37 @@ void Organizer::deleteSelectedFile()
     }
 }
 
+/**
+* Makes a keyword tree item editable.
+* Emitted when the user double clicks on a keyword.
+*
+* @param    QTreeWidgetItem*    Keyword that has been clicked.
+* @param    int                 Column of the keyword.
+*
+*/
 void Organizer::editKeyword(QTreeWidgetItem* selectedItem, int column)
 {
     ui->keywordsTree->editItem(selectedItem, column);
 }
 
+/**
+ * Resets the keywords property of Organizer class and retrieves new keywords.
+ * Emitted when a user edits a keyword from the keywords tree.
+ *
+ * @param    QTreeWidgetItem*    Edited keyword.
+ * @param    int                 Keyword column.
+ *
+ */
 void Organizer::keywordEdited(QTreeWidgetItem* selectedItem, int column)
 {
     this->getAllKeywords();
 }
 
+/**
+ * Deletes a keyword.
+ * Emitted when the user clicks keywords tree context menu item "Delete".
+ *
+ */
 void Organizer::deleteKeyword()
 {
     QTreeWidgetItem* selectedKeyword = ui->keywordsTree->selectedItems()[0];
@@ -252,6 +358,11 @@ void Organizer::deleteKeyword()
     delete selectedKeyword;
 }
 
+/**
+ * Retrieves all keywords from the keywords tree and adds them to
+ * keywords property of the class.
+ *
+ */
 void Organizer::getAllKeywords()
 {
     this->keywords.clear();
@@ -260,6 +371,16 @@ void Organizer::getAllKeywords()
     {
         this->keywords.append((*it)->text(0));
         ++it;
+    }
+}
+
+void Organizer::showSettingsDialog()
+{
+    OrganizerSettings settings;
+    int result = settings.exec();
+    if (result == 1)
+    {
+
     }
 }
 
